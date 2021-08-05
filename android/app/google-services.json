@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "401056574888",
+    "project_id": "ecomnewtest",
+    "storage_bucket": "ecomnewtest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401056574888:android:413ed9cbd5647d8355419d",
+        "android_client_info": {
+          "package_name": "com.mpluse.ecomtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401056574888-hqqhtg7kofqvbn37nhdi5pfp8ki1jis5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8peo6hnJZ3hVIS-IbiH4RaMVQj6cENoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401056574888-hqqhtg7kofqvbn37nhdi5pfp8ki1jis5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
