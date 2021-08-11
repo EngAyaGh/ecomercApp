@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+
       appBar: AppBar(
         title: Text('aya'),
       ),
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                 child: TextFormField(
                   controller: _userName,
                   decoration: InputDecoration(
-                    hintText: 'Enter User Name please',
+                    hintText: 'Enter User Name ',
                     prefixIcon: Icon(Icons.account_box),
                   ),
                 ),
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   controller: _password,
                   decoration: InputDecoration(
                     hintText: 'Enter Password',
-                    prefixIcon: Icon(Icons.password),
+                    prefixIcon: Icon(Icons.visibility_off),
                   ),
                 ),
               ),
@@ -146,6 +146,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+
             ],
           ),
         ),
