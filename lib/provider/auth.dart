@@ -35,6 +35,7 @@ class AuthClass {
   Future<String> restPassword({required String email})async{
     try{
       await _auth.sendPasswordResetEmail(email: email);
+      return "Email sent";
     }
         catch(e){return 'error occured';}
     return '';
