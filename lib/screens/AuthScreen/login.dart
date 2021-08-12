@@ -1,5 +1,9 @@
+import 'dart:html';
+
 import 'package:ecomtest/provider/auth.dart';
+import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/splash.dart';
+import 'package:ecomtest/widgets/MyLogo.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,8 +17,10 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailUser = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _password = TextEditingController();
+  final _globalKey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    double height=MediaQuery.of(context).size.height;
     return Scaffold(
 
       appBar: AppBar(
@@ -22,9 +28,12 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Center(
+        child: Form(
+          key: _globalKey,
           child: ListView(
             children: [
+              CustomLogo(),
+             SizedBox (height: height*0.1),
               Padding(
                 padding: const EdgeInsets.all(50),
                 child: TextFormField(
@@ -143,11 +152,31 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
               ),
+              SizedBox(height: height * 0.5,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Don\'t have account ? ',style: TextStyle(color: Colors.white,fontSize: 16),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()),
+                              );
+                    },
+                    child: Text('SignUp',style: TextStyle(fontSize: 16,color: Colors.black),
+
+                  ),)
+                ],
+              )
 
             ],
           ),
         ),
       ),
     );
+  }
+  void _validateForm(BuildContext context) async{
+
+
   }
 }

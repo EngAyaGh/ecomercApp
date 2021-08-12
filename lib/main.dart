@@ -1,3 +1,4 @@
+import 'package:ecomtest/screens/AuthScreen/login.dart';
 import 'package:ecomtest/screens/home.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 
         backgroundColor: Colors.teal,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
