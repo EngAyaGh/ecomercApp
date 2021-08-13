@@ -6,6 +6,8 @@ import 'package:ecomtest/screens/splash.dart';
 import 'package:ecomtest/widgets/MyLogo.dart';
 import 'package:flutter/material.dart';
 
+import '../../AllConsts.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailUser = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _password = TextEditingController();
+  bool _secure=true;
   final _globalKey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
 
       appBar: AppBar(
         title: Text('aya'),
+        backgroundColor: Colors.teal,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -39,6 +43,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextFormField(
                   controller: _userName,
                   decoration: InputDecoration(
+                   border: OutlineInputBorder(
+                     borderSide: BorderSide(style: BorderStyle.solid,),
+                   ),
                     hintText: 'Enter User Name ',
                     prefixIcon: Icon(Icons.account_box),
                   ),
@@ -50,8 +57,18 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _password,
                   decoration: InputDecoration(
                     hintText: 'Enter Password',
-                    prefixIcon: Icon(Icons.visibility_off),
+                    suffixIcon: IconButton(
+                      color: kMainColor,
+                      onPressed: (){
+                        setState(() {
+                          _secure=!_secure;
+                        });
+                      },
+                      icon: Icon(_secure?Icons.remove_red_eye:Icons.visibility_off),
+                    ),
+                    prefixIcon: Icon(Icons.lock,   color: kMainColor,),
                   ),
+                  obscureText: _secure,
                 ),
               ),
               Padding(
@@ -61,8 +78,9 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.black),
                   cursorColor: Colors.teal,
                   decoration: InputDecoration(
+
                     hintText: 'Enter Email',
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.email,color: Colors.teal,),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
@@ -75,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.teal,
                             style: BorderStyle.solid,
                             width: 2.0),
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10)
+                       ),
                     filled: true,
                     fillColor: Colors.black12,
                     focusedBorder: OutlineInputBorder(
