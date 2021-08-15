@@ -12,168 +12,144 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _key = GlobalKey<ScaffoldState>();
   //String? email =FirebaseAuth.instance.currentUser!.email;
   TextEditingController _emailUser = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
-    double width=MediaQuery.of(context).size.width;
-    double height=MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text('aya'),
-
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
         elevation: 10,
         child: ListView(
           children: [
+            UserAccountsDrawerHeader(
+                accountName: Text('aya Ghoury'),
+                accountEmail: Text('Aya@ghgh.com')),
             Stack(
               alignment: Alignment.center,
               children: [
-
                 CircleAvatar(
-                  backgroundImage:  AssetImage('images/icons/buy.png'),
-                  radius: width *.1,),
+                  backgroundImage: AssetImage('images/icons/buy.png'),
+                  radius: width * .1,
+                ),
                 Positioned(
-                    bottom:50,
-                    child: IconButton(onPressed: (){}, icon:Icon( Icons.add_a_photo))),
+                    bottom: 50,
+                    child: IconButton(
+                        onPressed: () {}, icon: Icon(Icons.add_a_photo))),
               ],
+            ),
+            ListTile(
+              title: Text('Add Products'),
+              leading: Icon(Icons.add_box_outlined),
+            ),
+            ListTile(
+              title: Text('Add Gategory'),
+              leading: Icon(Icons.add_box_outlined),
+            ),
+            ListTile(
+              title: Text('logout'),
+              leading: Icon(Icons.exit_to_app),
             )
-
-
           ],
-        ) ,
+        ),
       ),
-
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: TextFormField(
-                  controller: _userName,
-                  decoration: InputDecoration(
-                    hintText: 'Enter User Name ',
-                    prefixIcon: Icon(Icons.account_box),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: TextFormField(
-                  controller: _password,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Password',
-                    prefixIcon: Icon(Icons.visibility_off),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(50),
-                child: TextFormField(
-                  controller: _emailUser,
-                  style: TextStyle(color: Colors.black),
-                  cursorColor: Colors.teal,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Email',
-                    prefixIcon: Icon(Icons.email),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: Colors.teal,
-                          width: 2.0,
-                          style: BorderStyle.solid),
+              Stack(
+                children: [
+                  Positioned(
+                      top: 10,
+                      right: 20,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {
+
+                            _key.currentState!.openEndDrawer();
+                          },
+                          child: Icon(Icons.menu),
+                        ),
+                      )),
+                  Positioned(
+                      top: 10,
+                      right: 60,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Icon(Icons.shopping_cart),
+                        ),
+                      )),
+                  Positioned(
+                      top: 10,
+                      right: 100,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Icon(Icons.person),
+                        ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'What are\nyou Shopping for?',
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black.withOpacity(0.6),
+                          fontWeight: FontWeight.w400),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.teal,
-                            style: BorderStyle.solid,
-                            width: 2.0),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Colors.black12,
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.teal,
-                            style: BorderStyle.solid,
-                            width: 2.0)),
+                  ),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20))),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 8, left: 8, right: 8, bottom: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      title: TextField(
+                        textInputAction: TextInputAction.search,
+
+                        //(pattern)async{
+                        //await productProvider.search(productName: pattern);
+                        //changeScreen(context, ProductSearchScreen());
+                        //},
+                        decoration: InputDecoration(
+                          hintText: "blazer, dress...",
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-
-                // ignore: deprecated_member_use
-                child: FlatButton(
-                  textColor: Colors.white,
-                  color: Colors.teal,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () async {
-
-                    await AuthClass()
-                        .createAccount(
-                            email: _emailUser.text.trim(),
-                            Pass: _password.text.trim())
-                        .then((value) {
-                      if (value == 'Done') {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => Splash()),
-                            (route) => false);
-                      } else{
-                        print(value);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(value),
-                        ));
-                      }
-                    });
-                  },
-                  child: Text('Register'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FlatButton(
-                  textColor: Colors.white,
-                  color: Colors.teal,
-                  child: Text('login'),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () async {
-                    print(_emailUser.text);
-                    await AuthClass()
-                        .login(
-                            email: _emailUser.text.trim(),
-                            Pass: _password.text.trim())
-                        .then((value) {
-                      if (value == 'Done') {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => Splash()),
-                            (route) => false);
-                      } else
-                        {
-                          print(value);
-
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(value),
-                        ));
-                        }
-                    });
-                  },
-                ),
-              ),
-
             ],
           ),
         ),
