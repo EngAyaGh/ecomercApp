@@ -1,4 +1,4 @@
-import 'package:ecomtest/provider/auth.dart';
+import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,11 +18,38 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
+    double width=MediaQuery.of(context).size.width;
+    double height=MediaQuery.of(context).size.height;
+
+    return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text('aya'),
+
       ),
+      drawer: Drawer(
+        elevation: 10,
+        child: ListView(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+
+                CircleAvatar(
+                  backgroundImage:  AssetImage('images/icons/buy.png'),
+                  radius: width *.1,),
+                Positioned(
+                    bottom:50,
+                    child: IconButton(onPressed: (){}, icon:Icon( Icons.add_a_photo))),
+              ],
+            )
+
+
+          ],
+        ) ,
+      ),
+
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(

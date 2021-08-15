@@ -1,4 +1,4 @@
-import 'package:ecomtest/provider/auth.dart';
+import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/AuthScreen/login.dart';
 import 'package:flutter/material.dart';
 

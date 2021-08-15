@@ -1,14 +1,22 @@
+import 'package:ecomtest/provider/modhud.dart';
 import 'package:ecomtest/screens/AuthScreen/login.dart';
+import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/home.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'provider/auth.dart';
+import 'package:provider/provider.dart';
+import 'services/auth.dart';
+import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider<modprogress>(create: (_)=>modprogress()),
+      ],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +30,7 @@ class MyApp extends StatelessWidget {
 
         backgroundColor: Colors.teal,
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }

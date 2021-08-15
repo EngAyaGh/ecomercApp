@@ -1,61 +1,71 @@
 
 import 'package:ecomtest/AllConsts.dart';
 import 'package:flutter/material.dart';
-
-class CustomTextField extends StatelessWidget {
-  final String hint;
+import 'package:ecomtest/services/Validating.dart';
+class CustomTextField extends StatefulWidget {
+ final String hint;
   final IconData icon;
-  final Function onClick;
+  final TextEditingController con;
+  String mode;
+
+  CustomTextField(
+      { required this.icon,
+        required this.hint,
+        required this.con,
+required this.mode,
+
+
+      } );
+  @override
+  State<StatefulWidget> createState() =>
+      _myCustomState( );
+}
+
+class _myCustomState extends State<CustomTextField>{
+
   String _errorMessage(String str) {
 
-    switch (hint) {
+    switch (widget.hint) {
       case 'Enter your name':
         return 'Name is empty !';
       case 'Enter your email':
         return 'Email is empty !';
       case 'Enter your password':
         return 'Password is empty !';
-        default:  return '';
+      default:  return '';
     }
   }
 
-  CustomTextField(
-      {required this.onClick, required this.icon, required this.hint});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return _errorMessage(hint);
-            // ignore: missing_return
-          }
-        },
-        //onSaved: onClick!=null ?onClick : (val) {val="";},
+    return   Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: TextFormField(
 
-        obscureText: hint == 'Enter your password' ? true : false,
-        cursorColor: kMainColor,
-        decoration: InputDecoration(
-          hintText: hint,
-          prefixIcon: Icon(
-            icon,
-            color: kMainColor,
+            validator: (val) => validating().validAll(widget.mode,val!),
+            controller: widget.con,
+            decoration: InputDecoration(
+              hintText:widget. hint,
+              prefixIcon: Icon(
+                widget.icon,
+                color: kMainColor,
+              ),
+              filled: true,
+              fillColor: kSecondaryColor,
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.white)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.white)),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.white)),
+            ),
           ),
-          filled: true,
-          fillColor: kSecondaryColor,
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: Colors.white)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: Colors.white)),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(color: Colors.white)),
-        ),
-      ),
+
+
     );
-  }
-}
+}}
+
 

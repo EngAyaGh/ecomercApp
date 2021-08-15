@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:ecomtest/provider/auth.dart';
+import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:ecomtest/widgets/MyLogo.dart';
@@ -41,12 +41,13 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.all(50),
                 child: TextFormField(
+
                   controller: _userName,
                   decoration: InputDecoration(
                    border: OutlineInputBorder(
                      borderSide: BorderSide(style: BorderStyle.solid,),
                    ),
-                    hintText: 'Enter User Name ',
+                    hintText: 'Enter User Name',
                     prefixIcon: Icon(Icons.account_box),
                   ),
                 ),
@@ -78,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.black),
                   cursorColor: Colors.teal,
                   decoration: InputDecoration(
-
                     hintText: 'Enter Email',
                     prefixIcon: Icon(Icons.email,color: Colors.teal,),
                     border: OutlineInputBorder(
@@ -117,7 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   onPressed: () async {
-
                     await AuthClass()
                         .createAccount(
                         email: _emailUser.text.trim(),
