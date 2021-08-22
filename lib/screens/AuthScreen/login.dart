@@ -5,6 +5,7 @@ import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:ecomtest/widgets/MyLogo.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../AllConsts.dart';
 
@@ -121,8 +122,11 @@ class _LoginPageState extends State<LoginPage> {
                         .createAccount(
                         email: _emailUser.text.trim(),
                         Pass: _password.text.trim())
-                        .then((value) {
+                        .then((value) async {
                       if (value == 'Done') {
+                        SharedPreferences preferences  = await SharedPreferences.getInstance();
+                        preferences.setBool('loginstate', true);
+
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(builder: (context) => Splash()),

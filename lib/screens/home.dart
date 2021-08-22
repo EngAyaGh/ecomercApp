@@ -3,6 +3,7 @@ import 'package:ecomtest/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
 
     return Scaffold(
       key: _key,
@@ -59,6 +61,12 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('logout'),
               leading: Icon(Icons.exit_to_app),
+              onTap: () async {
+
+                SharedPreferences preferences  = await SharedPreferences.getInstance();
+                preferences.setBool('loginstate', false);
+
+              },
             )
           ],
         ),

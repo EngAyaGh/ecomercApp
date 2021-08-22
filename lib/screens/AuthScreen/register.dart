@@ -7,6 +7,7 @@ import 'package:ecomtest/widgets/MyTextFormField.dart';
 import 'package:ecomtest/widgets/passtextForm.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../splash.dart';
 class RegisterPage extends StatefulWidget {
@@ -75,23 +76,26 @@ class _RegisterPageState extends State<RegisterPage> {
                       ss=_userName.text.trim();
                       print('after $ss');
 
-                      /*await AuthClass()
+                      await AuthClass()
                           .createAccount(
                           email: _emailUser.text.trim(),
                           Pass: _password.text.trim())
-                          .then((value) {
+                          .then((value) async {
                         if (value == 'Done') {
+                          SharedPreferences preferences  = await SharedPreferences.getInstance();
+                        preferences.setBool('loginstate', true);
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder: (context) => Splash()),
                                   (route) => false);
+
                         } else{
                           print(value);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(value),
                           ));
                         }
-                      });*/
+                      });
                     }
 else{
   Provider.of<modprogress>(context,listen: false).changeLoad(false);
