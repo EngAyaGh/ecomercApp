@@ -1,4 +1,6 @@
+import 'package:ecomtest/AllConsts.dart';
 import 'package:ecomtest/provider/modhud.dart';
+import 'package:ecomtest/provider/products.dart';
 import 'package:ecomtest/screens/AuthScreen/login.dart';
 import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/home.dart';
@@ -16,33 +18,43 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<modprogress>(create: (_) => modprogress()),
+    ChangeNotifierProvider<ProductProvider>(create:(_)=>ProductProvider())
   ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   bool isUserLoggedIn = false;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SharedPreferences>(
-      future: SharedPreferences.getInstance(),
-      builder:  (context, snapshot) =>
-       !snapshot.hasData ?
-       //Center(child: CircularProgressIndicator(),)
-           MaterialApp(
-            home: Scaffold(
-              body: Center(
-                child: Text('Loading....'),
+        future: SharedPreferences.getInstance(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            //Center(child: CircularProgressIndicator(),)
+            return MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: Text('Loading....'),
+                ),
               ),
-            ),
-          )
-    : MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              backgroundColor: Colors.teal,
-            ),
-            home: isUserLoggedIn ? HomePage() : LoginPage(),
-          ));
+            );
+          } else {
+            isUserLoggedIn =
+            snapshot.data!.getBool(kKeepMeLoggedIn) ?? false;
+
+            return MaterialApp
+              (
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                backgroundColor: Colors.teal,
+              ),
+              home: isUserLoggedIn ? LoginPage() : LoginPage(),
+            );
+          }
+        }
+    );
   }
 }

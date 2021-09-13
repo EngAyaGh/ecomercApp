@@ -1,5 +1,6 @@
 import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/splash.dart';
+import 'package:ecomtest/widgets/productView.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
 
     return Scaffold(
       key: _key,
@@ -62,10 +62,9 @@ class _HomePageState extends State<HomePage> {
               title: Text('logout'),
               leading: Icon(Icons.exit_to_app),
               onTap: () async {
-
-                SharedPreferences preferences  = await SharedPreferences.getInstance();
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
                 preferences.setBool('loginstate', false);
-
               },
             )
           ],
@@ -85,7 +84,6 @@ class _HomePageState extends State<HomePage> {
                         alignment: Alignment.topRight,
                         child: GestureDetector(
                           onTap: () {
-
                             _key.currentState!.openEndDrawer();
                           },
                           child: Icon(Icons.menu),
@@ -158,6 +156,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('products all'),
+                    ),
+                  )
+                ],
+              ),
+              productView(),
             ],
           ),
         ),

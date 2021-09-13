@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:ecomtest/screens/home.dart';
 import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/AuthScreen/register.dart';
 import 'package:ecomtest/screens/splash.dart';
@@ -107,41 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
 
-                // ignore: deprecated_member_use
-                child: FlatButton(
-                  textColor: Colors.white,
-                  color: Colors.teal,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () async {
-                    await AuthClass()
-                        .createAccount(
-                        email: _emailUser.text.trim(),
-                        Pass: _password.text.trim())
-                        .then((value) async {
-                      if (value == 'Done') {
-                        SharedPreferences preferences  = await SharedPreferences.getInstance();
-                        preferences.setBool('loginstate', true);
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => Splash()),
-                                (route) => false);
-                      } else{
-                        print(value);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(value),
-                        ));
-                      }
-                    });
-                  },
-                  child: Text('Register'),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FlatButton(
@@ -156,11 +123,13 @@ class _LoginPageState extends State<LoginPage> {
                         .login(
                         email: _emailUser.text.trim(),
                         Pass: _password.text.trim())
-                        .then((value) {
-                      if (value == 'Done') {
+                        .then((value) async{
+                      if (value == 'Done')  {
+                        SharedPreferences preferences  = await SharedPreferences.getInstance();
+                        preferences.setBool(kKeepMeLoggedIn, true);
                         Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (context) => Splash()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                                 (route) => false);
                       } else
                       {
