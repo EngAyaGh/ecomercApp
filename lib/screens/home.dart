@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/screens/splash.dart';
 import 'package:ecomtest/widgets/productView.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +22,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _emailUser = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _password = TextEditingController();
+  XFile? im_picked;
+  File? img_file;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -41,13 +46,23 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('images/icons/buy.png'),
+                  backgroundImage: img_file==null
+                      ? AssetImage('images/icons/buy.png')
+                      : Image.file(img_file!,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,).image,//,
                   radius: width * .1,
                 ),
                 Positioned(
                     bottom: 50,
                     child: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.add_a_photo))),
+                        onPressed: () async {
+                        im_picked=await ImagePicker().pickImage(source: ImageSource.gallery);
+                       setState(() {
+                         img_file=File(im_picked!.path) ;
+                       });
+                        }, icon: Icon(Icons.add_a_photo))),
               ],
             ),
             ListTile(
@@ -162,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       alignment: Alignment.center,
-                      child: Text('products all'),
+                      child: Text('products '),
                     ),
                   )
                 ],
@@ -174,4 +189,5 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
 }

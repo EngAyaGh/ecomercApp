@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 backgroundColor: Colors.teal,
               ),
-              home: isUserLoggedIn ? LoginPage() : LoginPage(),
+              home: isUserLoggedIn ? HomePage() : HomePage(),
             );
           }
         }

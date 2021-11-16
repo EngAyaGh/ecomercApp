@@ -29,16 +29,20 @@ class ProductProvider extends ChangeNotifier {
 
   Future< List<productModel> > getsnap() async {
     //productModel mn;
+    //clear();
     var result=await _api.getDataCollection()
         .then( (querySnapshot) => {
     querySnapshot.docs.forEach((doc) =>
      products.add( productModel.fromSnapshot(doc))
     )
   });
-    notifyListeners();
-    return products;
+    //notifyListeners();
+    return [...products];
   }
-
+  void clear() {
+    products = [];
+    notifyListeners();
+  }
 }
 
 
