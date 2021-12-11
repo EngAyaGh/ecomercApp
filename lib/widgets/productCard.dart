@@ -1,6 +1,7 @@
+import 'package:ecomtest/View/product_details.dart';
 import 'package:ecomtest/models/products.dart';
 import 'package:ecomtest/provider/products.dart';
-import 'package:ecomtest/screens/product_details.dart';
+import 'package:ecomtest/View/product_details.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _productCardState extends State<productCard> {
         child: InkWell(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ProductDetails()));
+                  context, MaterialPageRoute(builder: (_) => ProductDetails( product: widget.product,)));
             },
             child: Container(
               width: MediaQuery.of(context).size.width /3,
@@ -194,7 +195,7 @@ class _productCardState extends State<productCard> {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => ProductDetails()));
+              context, MaterialPageRoute(builder: (_) => ProductDetails( product: widget.product,)));
         },
         child: Container(
           width: MediaQuery.of(context).size.width /3,
@@ -208,7 +209,7 @@ class _productCardState extends State<productCard> {
                 color: Colors.black87.withOpacity(0.05),
               ),
             ],
-            color: Colors.white30
+            color: Colors.white
           ),
           child: Column(
 
@@ -216,20 +217,17 @@ class _productCardState extends State<productCard> {
               Container(
                 child: Stack(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top:8.0),
-                      child: Positioned(
+                    Positioned(
 
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            //widget.product.im,
-                            "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          //widget.product.im,
+                          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
 
-                            fit: BoxFit.fill,
-                            height: MediaQuery.of(context).size.height/4,
-                            width: MediaQuery.of(context).size.width/3,
-                          ),
+                          fit: BoxFit.fill,
+                          height: MediaQuery.of(context).size.height/4,
+                          width: MediaQuery.of(context).size.width/3,
                         ),
                       ),
                     ),

@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ecomtest/MView/productSearchView.dart';
+import 'package:ecomtest/MView/productView.dart';
 import 'package:ecomtest/services/auth.dart';
-import 'package:ecomtest/screens/splash.dart';
-import 'package:ecomtest/widgets/productView.dart';
+import 'package:ecomtest/View/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -157,11 +158,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       title: TextField(
                         textInputAction: TextInputAction.search,
-
-                        //(pattern)async{
-                        //await productProvider.search(productName: pattern);
+                       onSubmitted:  (pattern)async{
+                        await Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => productSearchView(pattern))); //.search(productName: pattern);
                         //changeScreen(context, ProductSearchScreen());
-                        //},
+                        },
                         decoration: InputDecoration(
                           hintText: "blazer, dress...",
                           border: InputBorder.none,

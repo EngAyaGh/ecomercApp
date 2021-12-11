@@ -1,15 +1,16 @@
 import 'package:ecomtest/AllConsts.dart';
 import 'package:ecomtest/provider/modhud.dart';
 import 'package:ecomtest/provider/products.dart';
-import 'package:ecomtest/screens/AuthScreen/login.dart';
-import 'package:ecomtest/screens/AuthScreen/register.dart';
-import 'package:ecomtest/screens/home.dart';
-import 'package:ecomtest/screens/splash.dart';
+import 'package:ecomtest/View/AuthScreen/login.dart';
+import 'package:ecomtest/View/AuthScreen/register.dart';
+import 'package:ecomtest/View/home.dart';
+import 'package:ecomtest/View/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'View/home.dart';
 import 'services/auth.dart';
 import 'package:provider/provider.dart';
 

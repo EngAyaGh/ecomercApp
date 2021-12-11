@@ -1,6 +1,10 @@
+import 'package:ecomtest/models/products.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatefulWidget {
+  final productModel product;
+  const ProductDetails({Key? key, required this.product}) : super(key: key);
+
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
@@ -10,15 +14,15 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: Container(
-        color: Colors.black.withOpacity(0.9),
+        //color: Colors.black.withOpacity(0.9),
         child: Column(
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Image.asset(
-                  "images/m2.jpg",
+                Image.network(
+                  widget.product.im,
                   height: 350,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
 
                 Align(
@@ -54,7 +58,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   children: <Widget>[
                     Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: IconButton(icon: Icon(Icons.arrow_back_ios, color: Colors.white,), onPressed: (){
+                        child: IconButton(icon: Icon(Icons.arrow_back_ios, color: Colors.white,),
+                            onPressed: (){
                           Navigator.pop(context);
                         })
                     ),
@@ -133,12 +138,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Text('Product Blazer', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300,fontSize: 20),),
+                            child: Text( widget.product.nameprod, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300,fontSize: 20),),
                           ),
 
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Text('\$35.99', textAlign: TextAlign.end,style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),),
+                            child: Text(' \$ ${widget.product.price} ', textAlign: TextAlign.end,style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),),
                           ),
                         ],
                       ),
@@ -152,7 +157,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20),),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black,
+                          color: Colors.teal,
                           offset: Offset(2, 5),
                           blurRadius: 10
                       )
@@ -275,12 +280,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                     ),
 
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Description:\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s  Lorem Ipsum has been the industry standard dummy text ever since the 1500s ', style: TextStyle(color: Colors.white)),
+                    //Expanded(
+                    //  child:
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+
+                        child: Text('Description:\n ${widget.product.discreption} ',
+                            style: TextStyle(color: Colors.white)),
                       ),
-                    ),
+                   // ),
 
                     Padding(
                       padding:
