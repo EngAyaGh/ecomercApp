@@ -1,14 +1,16 @@
 
 
-import 'package:ecomtest/screens/home.dart';
+import 'package:ecomtest/View/AuthScreen/register.dart';
+import 'package:ecomtest/View/home.dart';
 import 'package:ecomtest/services/auth.dart';
-import 'package:ecomtest/screens/AuthScreen/register.dart';
-import 'package:ecomtest/screens/splash.dart';
+import 'package:ecomtest/View/AuthScreen/register.dart';
+import 'package:ecomtest/View/splash.dart';
 import 'package:ecomtest/widgets/MyLogo.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../AllConsts.dart';
+import '../home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

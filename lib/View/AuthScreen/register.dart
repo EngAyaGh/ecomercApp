@@ -1,6 +1,6 @@
 import 'package:ecomtest/services/auth.dart';
 import 'package:ecomtest/provider/modhud.dart';
-import 'package:ecomtest/screens/AuthScreen/login.dart';
+import 'package:ecomtest/View/AuthScreen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:ecomtest/widgets/MyLogo.dart';
 import 'package:ecomtest/widgets/MyTextFormField.dart';
